@@ -1,73 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Raccoon Quiz</title>
-    <link href="https://cdn.tailwindcss.com" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест з англійської мови</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-green-100">
-<div class="flex flex-col items-center justify-center min-h-screen" id="app">
-    
-    <div class="w-80 bg-green-400 rounded-lg shadow-lg p-4 text-center" id="main-menu">
-        <div class="bg-orange-400 p-2 flex justify-between items-center rounded-t-lg">
-            <span class="text-white text-xl font-bold">Raccoon</span>
-        </div>
-        <div class="p-4 text-center">
-            <img alt="Raccoon logo" class="mx-auto my-2" src="https://placehold.co/50x50"/>
-            <p class="text-white font-bold">Обери рівень знань для англійської мови</p>
-            <div class="flex justify-around mt-4">
-                <button class="bg-white text-green-400 font-bold py-2 px-4 rounded-full" onclick="showSubMenu('A')">A</button>
-                <button class="bg-white text-green-400 font-bold py-2 px-4 rounded-full" onclick="showSubMenu('B')">B</button>
-                <button class="bg-white text-green-400 font-bold py-2 px-4 rounded-full" onclick="showSubMenu('C')">C</button>
-            </div>
-            <div class="flex justify-around mt-4">
-                <i class="fas fa-info-circle text-white text-2xl" onclick="showInfo()"></i>
-                <i class="fab fa-telegram text-white text-2xl" onclick="window.open('https://telegram.org', '_blank')"></i>
-            </div>
-        </div>
+<body>
+
+    <div id="main-menu" class="menu">
+        <h1>
+            <span>Виберіть рівень:</span>
+            <img id="logo" src="image.png" alt="Logo">
+        </h1>
+        <button class="menu-button" onclick="showSubMenu('A')">A</button>
+        <button class="menu-button" onclick="showSubMenu('B')">B</button>
+        <button class="menu-button" onclick="showSubMenu('C')">C</button>
+        <button class="menu-button" onclick="showInfo()">Інформація</button>
     </div>
 
-    <div class="w-80 bg-green-400 rounded-lg shadow-lg p-4 text-center hidden" id="sub-menu">
-        <div class="bg-orange-400 p-2 flex justify-between items-center rounded-t-lg">
-            <span class="text-white text-xl font-bold">Raccoon</span>
-            <i class="fas fa-times text-white" onclick="closeSubMenu()"></i>
-        </div>
-        <div class="p-4 text-center">
-            <img alt="Raccoon logo" class="mx-auto my-2" src="https://placehold.co/50x50"/>
-            <p class="text-white font-bold">Обери рівень знань для англійської мови</p>
-            <div class="flex justify-around mt-4" id="sub-menu-buttons">
-            </div>
-        </div>
-    </div>
-    <div class="w-80 bg-green-400 rounded-lg shadow-lg p-4 text-center hidden" id="quiz">
-        <div class="bg-orange-400 p-2 flex justify-between items-center rounded-t-lg">
-            <img alt="Raccoon logo" class="w-8 h-8" src="https://placehold.co/30x30"/>
-            <span class="text-white text-xl font-bold">Raccoon</span>
-            <i class="fas fa-times text-white" onclick="closeQuiz()"></i>
-        </div>
-        <div class="p-4 text-center">
-            <p class="text-white text-2xl font-bold" id="quiz-word">Word</p>
-            <div class="flex flex-col mt-4" id="quiz-options">
-            </div>
-            <div id="quiz-results" class="hidden"></div>
-        </div>
+    <div id="sub-menu" class="menu hidden">
+        <h1>Виберіть підрівень:</h1>
+        <div id="sub-menu-buttons"></div>
+        <button onclick="backToMenu()" class="back-button">Назад</button>
     </div>
 
-    <div class="w-80 bg-green-400 rounded-lg shadow-lg p-4 text-center hidden" id="info">
-        <div class="bg-orange-400 p-2 flex justify-between items-center rounded-t-lg">
-            <span class="text-white text-xl font-bold">Raccoon</span>
-            <i class="fas fa-times text-white" onclick="closeInfo()"></i>
-                    </div>
-        <div class="p-4 text-center">
-            <p class="text-white text-2xl font-bold">Про проект</p>
-            <p class="text-white mt-4">Raccoon – це проект для вивчення англійської мови у формі вікторини. Користувач обирає рівень знань (A, B, C) та проходить завдання на переклад слів з англійської на українську. Проект створено командою з 4 осіб.</p>
-            <img alt="Raccoon logo" class="mx-auto my-2" src="https://placehold.co/50x50"/>
-        </div>
-    </div>
-</div>
+    <div id="quiz" class="quiz hidden">
+        <h2 id="quiz-word"></h2>
+        <div id="quiz-options"></div>
+        <button onclick="closeQuiz()" class="exit-button">Завершити тест</button>
 
-<script src="script.js"></script>
+    </div>
+
+    <div id="quiz-results" class="quiz hidden"></div>
+
+    <div id="info" class="info hidden">
+        <h2>Інформація:</h2>
+        <p id="info-text">Цей тест дозволяє перевірити ваші знання англійської мови на різних рівнях (A, B, C).</p>
+        <button onclick="closeInfo()" class="close-button">Закрити</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
