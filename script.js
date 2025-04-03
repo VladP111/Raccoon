@@ -90,9 +90,9 @@ function showSubMenu(level) {
     subMenuButtons.innerHTML = '';
     levels[level].forEach(subLevel => {
         const button = document.createElement('button');
-        button.className = 'bg-white text-green-400 font-bold py-2 px-4 rounded-full';
+        button.className = 'wood-button';  
         button.innerText = subLevel;
-        button.onclick = () => startQuiz(subLevel);
+        button.onclick = () => startQuiz(subLevel); 
         subMenuButtons.appendChild(button);
     });
 }
@@ -114,7 +114,7 @@ function loadQuiz() {
     
     quizData.options.forEach(option => {
         const button = document.createElement('button');
-        button.className = 'wood-button';
+        button.className = 'wood-button'; 
         button.innerText = option;
         button.onclick = () => checkAnswer(option, quizData.correct);
         quizOptions.appendChild(button);
@@ -133,31 +133,28 @@ function checkAnswer(selected, correct) {
         currentQuestionIndex++;
         loadQuiz();
     } else {
-        showResults();
+        endTest();
     }
 }
 
-function showResults() {
+function endTest() {
+    document.getElementById('quiz').classList.add('hidden');
     const quizResults = document.getElementById('quiz-results');
     quizResults.innerHTML = `
-        <p class="text-white text-xl font-bold">Результат: ${correctAnswersCount}/${words[currentLevel].length}</p>
-        <button onclick="returnToMainMenu()" 
-                class="bg-orange-400 text-white px-4 py-2 rounded-full mt-4 hover:bg-orange-500">
-            Повернутися в меню
-        </button>
+        <p class="text-xl font-bold">Результат: ${correctAnswersCount}/${words[currentLevel].length}</p>
+        <button onclick="returnToMainMenu()" class="back-button">Повернутися в меню</button>
     `;
     quizResults.classList.remove('hidden');
-    document.getElementById('quiz-options').classList.add('hidden');
 }
 
 function returnToMainMenu() {
+    document.getElementById('main-menu').classList.remove('hidden');
+    document.getElementById('sub-menu').classList.add('hidden');
     document.getElementById('quiz').classList.add('hidden');
     document.getElementById('quiz-results').classList.add('hidden');
-    document.getElementById('main-menu').classList.remove('hidden');
-    document.getElementById('quiz-options').classList.remove('hidden');
 }
 
-function closeSubMenu() {
+function backToMenu() {
     document.getElementById('sub-menu').classList.add('hidden');
     document.getElementById('main-menu').classList.remove('hidden');
 }
@@ -169,11 +166,5 @@ function closeQuiz() {
 }
 
 function showInfo() {
-    document.getElementById('main-menu').classList.add('hidden');
-    document.getElementById('info').classList.remove('hidden');
-}
-
-function closeInfo() {
-    document.getElementById('info').classList.add('hidden');
-    document.getElementById('main-menu').classList.remove('hidden');
+    alert("Raccoon – це проект для вивчення англійської мови у формі вікторини. Користувач обирає рівень знань (A, B, C) та проходить завдання на переклад слів з англійської на українську. Проєкт створено командою з 4 осіб. 🦝");
 }
