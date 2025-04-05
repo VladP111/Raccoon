@@ -1,12 +1,14 @@
+// Створюємо об'єкт із рівнями і підрівнями
 let levels = { 
     A: ['A1', 'A2'], 
     B: ['B1', 'B2'], 
     C: ['C1', 'C2'] 
 };
 
+// Створюємо об'єкт зі словами для кожного підрівня
 let words = { 
     A1: [
-        { word: 'Apple', options: ['яблуко', 'ананас', 'груша'], correct: 'яблуко' },
+        { word: 'Apple', options: ['яблуко', 'ананас', 'груша'], correct: 'яблуко' }, // Слово з варіантами і правильною відповіддю
         { word: 'Cat', options: ['кіт', 'собака', 'птиця'], correct: 'кіт' },
         { word: 'Dog', options: ['кіт', 'собака', 'птиця'], correct: 'собака' },
         { word: 'House', options: ['будинок', 'квартира', 'офіс'], correct: 'будинок' },
@@ -29,7 +31,7 @@ let words = {
         { word: 'City', options: ['місто', 'село', 'селище'], correct: 'місто' },
         { word: 'Country', options: ['країна', 'місто', 'село'], correct: 'країна' }
     ],
-        B1: [
+    B1: [
         { word: 'Experience', options: ['план', 'помилка', 'досвід'], correct: 'досвід' },
         { word: 'Challenge', options: ['виклик', 'завдання', 'проблема'], correct: 'виклик' },
         { word: 'Opportunity', options: ['можливість', 'шанс', 'ризик'], correct: 'можливість' },
@@ -79,106 +81,126 @@ let words = {
     ]
 };
 
+// Змінна для збереження поточного підрівня
 let currentLevel = null;
+
+// Індекс поточного питання
 let currentQuestionIndex = 0;
+
+// Кількість правильних відповідей
 let correctAnswersCount = 0;
 
+// Функція для показу підменю при виборі рівня
 function showSubMenu(level) {
-    document.getElementById('main-menu').classList.add('hidden');
-    document.getElementById('sub-menu').classList.remove('hidden');
-    let subMenuButtons = document.getElementById('sub-menu-buttons');
-    subMenuButtons.innerHTML = '';
+    document.getElementById('main-menu').classList.add('hidden'); // Ховаємо головне меню
+    document.getElementById('sub-menu').classList.remove('hidden'); // Показуємо підменю
+    let subMenuButtons = document.getElementById('sub-menu-buttons'); // Отримуємо контейнер для кнопок підрівнів
+    subMenuButtons.innerHTML = ''; // Очищаємо старі кнопки
+
+    // Створюємо кнопки для кожного підрівня рівня
     levels[level].forEach(subLevel => {
-        let button = document.createElement('button');
-        button.className = 'wood-button';  
-        button.innerText = subLevel;
-        button.onclick = () => startQuiz(subLevel); 
+        let button = document.createElement('button'); // Створюємо кнопку
+        button.className = 'wood-button';  // Додаємо клас стилю
+        button.innerText = subLevel; // Назва підрівня
+        button.onclick = () => startQuiz(subLevel); // Запускаємо вікторину при кліку
         subMenuButtons.appendChild(button);
     });
 }
 
+// Функція запуску вікторини
 function startQuiz(level) {
-    currentLevel = level;
-    currentQuestionIndex = 0;
-    correctAnswersCount = 0;
-    document.getElementById('sub-menu').classList.add('hidden');
-    document.getElementById('quiz').classList.remove('hidden');
-    loadQuiz();
+    currentLevel = level; // Запам'ятовуємо підрівень
+    currentQuestionIndex = 0; // Починаємо з першого слова
+    correctAnswersCount = 0; // Обнуляємо правильні відповіді
+    document.getElementById('sub-menu').classList.add('hidden'); // Ховаємо підменю
+    document.getElementById('quiz').classList.remove('hidden'); // Показуємо блок з вікториною
+    loadQuiz(); // Завантажуємо перше питання
 }
 
+// Завантаження поточного питання
 function loadQuiz() {
-    let quizData = words[currentLevel][currentQuestionIndex];
-    document.getElementById('quiz-word').innerText = quizData.word;
-    let quizOptions = document.getElementById('quiz-options');
-    quizOptions.innerHTML = '';
-    
+    let quizData = words[currentLevel][currentQuestionIndex]; // Отримуємо поточне питання
+    document.getElementById('quiz-word').innerText = quizData.word; // Виводимо слово для перекладу
+    let quizOptions = document.getElementById('quiz-options'); // Отримуємо блок з кнопками варіантів
+    quizOptions.innerHTML = ''; // Очищаємо старі варіанти
+
+    // Створюємо кнопки для кожного варіанту перекладу
     quizData.options.forEach(option => {
-        let button = document.createElement('button');
-        button.className = 'wood-button'; 
-        button.innerText = option;
-        button.onclick = () => checkAnswer(option, quizData.correct);
+        let button = document.createElement('button'); // Створюємо кнопку
+        button.className = 'wood-button'; // Стиль кнопки
+        button.innerText = option; // Текст кнопки — варіант відповіді
+        button.onclick = () => checkAnswer(option, quizData.correct); // Перевірка відповіді при кліку
         quizOptions.appendChild(button);
     });
 }
 
+// Перевірка відповіді користувача
 function checkAnswer(selected, correct) {
-    let buttons = document.querySelectorAll('.wood-button');
+    let buttons = document.querySelectorAll('.wood-button'); // Отримуємо всі кнопки варіантів
+
+    // Проходимо по кожній кнопці і змінюємо її колір залежно від правильності
     buttons.forEach(function(button) {
-        let isCorrect = button.innerText === correct;
-        let isSelected = button.innerText === selected;
-        
+        let isCorrect = button.innerText === correct; // Чи ця кнопка правильна
+        let isSelected = button.innerText === selected; // Чи ця кнопка була натиснута
+
         if (isCorrect) {
-            button.style.color = '#38F088';
+            button.style.color = '#38F088'; // Зелений для правильної
         } 
-            
         else if (isSelected && !isCorrect) {
-            button.style.color = '#E83737';
+            button.style.color = '#E83737'; // Червоний для хибної відповіді
         }
-            
         else {
-            button.style.color = 'FFFFFF';  
+            button.style.color = 'FFFFFF';  // Білий для інших (тут краще "#FFFFFF")
         }
     });
 
+    // Через 1 секунду переходимо до наступного питання або завершення
     setTimeout(function() {
-        if (selected === correct) correctAnswersCount++;
-        currentQuestionIndex++;
+        if (selected === correct) correctAnswersCount++; // Збільшуємо рахунок, якщо відповідь правильна
+        currentQuestionIndex++; // Переходимо до наступного питання
         if (currentQuestionIndex < words[currentLevel].length) {
-            loadQuiz();
+            loadQuiz(); // Якщо ще є питання — завантажуємо
         } else {
-            endTest();
+            endTest(); // Інакше — кінець вікторини
         }
-    }, 1000);
+    }, 1000); // Затримка 1 секунда
 }
 
+// Кінець вікторини — показ результату
 function endTest() {
-    document.getElementById('quiz').classList.add('hidden');
-    let quizResults = document.getElementById('quiz-results');
+    document.getElementById('quiz').classList.add('hidden'); // Ховаємо вікторину
+    let quizResults = document.getElementById('quiz-results'); // Отримуємо блок результатів
+
+    // Записуємо результат і додаємо кнопку повернення
     quizResults.innerHTML = `
         <p class="text-xl font-bold">Результат: ${correctAnswersCount}/${words[currentLevel].length}</p>
         <button onclick="returnToMainMenu()" class="back-button">Повернутися в меню</button>
     `;
-    quizResults.classList.remove('hidden');
+    quizResults.classList.remove('hidden'); // Показуємо блок результату
 }
 
+// Повернення до головного меню
 function returnToMainMenu() {
-    document.getElementById('main-menu').classList.remove('hidden');
-    document.getElementById('sub-menu').classList.add('hidden');
-    document.getElementById('quiz').classList.add('hidden');
-    document.getElementById('quiz-results').classList.add('hidden');
+    document.getElementById('main-menu').classList.remove('hidden'); // Показуємо головне меню
+    document.getElementById('sub-menu').classList.add('hidden'); // Ховаємо підменю
+    document.getElementById('quiz').classList.add('hidden'); // Ховаємо вікторину
+    document.getElementById('quiz-results').classList.add('hidden'); // Ховаємо результати
 }
 
+// Функція повернення з підменю назад у головне меню
 function backToMenu() {
-    document.getElementById('sub-menu').classList.add('hidden');
-    document.getElementById('main-menu').classList.remove('hidden');
+    document.getElementById('sub-menu').classList.add('hidden'); // Ховаємо підменю
+    document.getElementById('main-menu').classList.remove('hidden'); // Показуємо головне меню
 }
 
+// Функція закриття вікторини та повернення до головного меню
 function closeQuiz() {
-    document.getElementById('quiz').classList.add('hidden');
-    document.getElementById('quiz-results').classList.add('hidden');
-    document.getElementById('main-menu').classList.remove('hidden');
+    document.getElementById('quiz').classList.add('hidden'); // Ховаємо вікторину
+    document.getElementById('quiz-results').classList.add('hidden'); // Ховаємо результати
+    document.getElementById('main-menu').classList.remove('hidden'); // Показуємо головне меню
 }
 
+// Інформація про проєкт
 function showInfo() {
     alert("Raccoon – це проект для вивчення англійської мови у формі вікторини. Користувач обирає рівень знань (A, B, C) та проходить завдання на переклад слів з англійської на українську. Проєкт створено командою з 4 осіб. 🦝");
 }
