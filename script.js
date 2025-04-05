@@ -1,10 +1,10 @@
-const levels = { 
+let levels = { 
     A: ['A1', 'A2'], 
     B: ['B1', 'B2'], 
     C: ['C1', 'C2'] 
 };
 
-const words = { 
+let words = { 
     A1: [
         { word: 'Apple', options: ['яблуко', 'ананас', 'груша'], correct: 'яблуко' },
         { word: 'Cat', options: ['кіт', 'собака', 'птиця'], correct: 'кіт' },
@@ -86,10 +86,10 @@ let correctAnswersCount = 0;
 function showSubMenu(level) {
     document.getElementById('main-menu').classList.add('hidden');
     document.getElementById('sub-menu').classList.remove('hidden');
-    const subMenuButtons = document.getElementById('sub-menu-buttons');
+    let subMenuButtons = document.getElementById('sub-menu-buttons');
     subMenuButtons.innerHTML = '';
     levels[level].forEach(subLevel => {
-        const button = document.createElement('button');
+        let button = document.createElement('button');
         button.className = 'wood-button';  
         button.innerText = subLevel;
         button.onclick = () => startQuiz(subLevel); 
@@ -107,13 +107,13 @@ function startQuiz(level) {
 }
 
 function loadQuiz() {
-    const quizData = words[currentLevel][currentQuestionIndex];
+    let quizData = words[currentLevel][currentQuestionIndex];
     document.getElementById('quiz-word').innerText = quizData.word;
-    const quizOptions = document.getElementById('quiz-options');
+    let quizOptions = document.getElementById('quiz-options');
     quizOptions.innerHTML = '';
     
     quizData.options.forEach(option => {
-        const button = document.createElement('button');
+        let button = document.createElement('button');
         button.className = 'wood-button'; 
         button.innerText = option;
         button.onclick = () => checkAnswer(option, quizData.correct);
@@ -122,24 +122,33 @@ function loadQuiz() {
 }
 
 function checkAnswer(selected, correct) {
-    if (selected === correct) {
-        correctAnswersCount++;
-        alert('Правильно! ✔️');
-    } else {
-        alert(`Неправильно! ❌ Правильна відповідь: ${correct}`);
-    }
+    let buttons = document.querySelectorAll('.wood-button');
+    buttons.forEach(function(button) {
+        let isCorrect = button.innerText === correct;
+        let isSelected = button.innerText === selected;
 
-    if (currentQuestionIndex < words[currentLevel].length - 1) {
+        anime({
+            targets: button,
+            backgroundColor: isCorrect ? '#4CAF50' : isSelected ? '#F44336' : button.style.backgroundColor,
+            duration: 400,
+            easing: 'easeInOutQuad'
+        });
+    });
+
+    setTimeout(function() {
+        if (selected === correct) correctAnswersCount++;
         currentQuestionIndex++;
-        loadQuiz();
-    } else {
-        endTest();
-    }
+        if (currentQuestionIndex < words[currentLevel].length) {
+            loadQuiz();
+        } else {
+            endTest();
+        }
+    }, 1000);
 }
 
 function endTest() {
     document.getElementById('quiz').classList.add('hidden');
-    const quizResults = document.getElementById('quiz-results');
+    let quizResults = document.getElementById('quiz-results');
     quizResults.innerHTML = `
         <p class="text-xl font-bold">Результат: ${correctAnswersCount}/${words[currentLevel].length}</p>
         <button onclick="returnToMainMenu()" class="back-button">Повернутися в меню</button>
