@@ -126,13 +126,18 @@ function checkAnswer(selected, correct) {
     buttons.forEach(function(button) {
         let isCorrect = button.innerText === correct;
         let isSelected = button.innerText === selected;
-
-        anime({
-            targets: button,
-            backgroundColor: isCorrect ? '#4CAF50' : isSelected ? '#F44336' : button.style.backgroundColor,
-            duration: 400,
-            easing: 'easeInOutQuad'
-        });
+        
+        if (isCorrect) {
+            button.style.color = '#38F088';
+        } 
+            
+        else if (isSelected && !isCorrect) {
+            button.style.color = '#E83737';
+        }
+            
+        else {
+            button.style.color = 'FFFFFF';  
+        }
     });
 
     setTimeout(function() {
