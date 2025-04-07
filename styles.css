@@ -213,6 +213,11 @@ body {
     font-family: Arial;
 }
 
+@keyframes slideUpFade {
+    0% { transform: translateY(30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
 @media (min-width: 1280px) {
     .menu, .quiz, .info {
         width: 400px;
@@ -233,9 +238,17 @@ body {
         font-size: 28px;
     }
 
-    #logo {
+ #logo {
         width: 150px;
+        animation: slideUpFade 1s ease-out 0.3s both;
+        transition: transform 0.3s ease, filter 0.3s ease;
     }
+
+    #logo:hover {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+    }
+}
 
     .quiz {
         font-size: 20px;
@@ -259,6 +272,18 @@ body {
         padding: 18px;
     }
 
+    #logo {
+        width: 120px;
+        animation: slideUpFade 1s ease-out 0.3s both;
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    #logo:hover {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+    }
+}
+    
     .menu-button,
     .wood-button,
     .exit-button,
@@ -276,6 +301,13 @@ body {
 
     #logo {
         width: 100px;
+        animation: slideUpFade 1s ease-out 0.3s both;
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    #logo:hover {
+        transform: scale(1.1);
+        filter: brightness(1.2);
     }
 
     #main-menu h1 {
@@ -300,8 +332,15 @@ body {
         height: 55px;
     }
 
-    #logo {
+  #logo {
         width: 80px;
+        animation: slideUpFade 1s ease-out 0.3s both;
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    #logo:hover {
+        transform: scale(1.1);
+        filter: brightness(1.2);
     }
 
     .quiz {
@@ -323,6 +362,17 @@ body {
         gap: 10px;
     }
 
+   #logo {
+        width: 80px;
+        animation: slideUpFade 1s ease-out 0.3s both;
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    #logo:hover {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+    }
+    
     .menu, .quiz, .info {
         width: 95%;
     }
@@ -341,7 +391,18 @@ body {
     #main-menu h1 {
         font-size: calc(1vw + 0.4em);
     }
+    #logo {
+        width: 80px;
+        animation: slideUpFade 1s ease-out 0.3s both;
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
 
+    #logo:hover {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+    }
+
+    
     .quiz {
         font-size: calc(0.8vw + 0.4em);
     }
@@ -353,6 +414,17 @@ body {
         padding: 16px;
     }
 
+    #logo {
+        width: 80px;
+        animation: slideUpFade 1s ease-out 0.3s both;
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    #logo:hover {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+    }
+    
     .menu-button,
     .wood-button,
     .exit-button,
