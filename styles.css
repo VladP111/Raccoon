@@ -47,23 +47,26 @@ body {
     transform: scale(1.05); 
 }
 
-.quiz h2, .info h2 {
+#sub-menu h1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
     font-size: 24px;
-    color: 
+    color: #4CAF50; 
     padding: 10px;
-    border: 2px solid white;
-    border-radius: 15px; /
-    background-color: rgba(255, 255, 255, 0.7)
+    border: 2px solid white; 
+    border-radius: 15px; 
+    background-color: rgba(255, 255, 255, 0.7); 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     transition: all 0.3s ease;
 }
 
-.quiz h2:hover, .info h2:hover {
+#sub-menu h1:hover {
     background-color: rgba(255, 255, 255, 1); 
-    color: #388E3C; 
+    color: #388E3C;
     transform: scale(1.05); 
 }
-
 
 .menu-button {
     background-image: url("wood.png");
@@ -157,13 +160,6 @@ body {
     margin-bottom: 20px;
 }
 
-#main-menu h1 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    font-size: 24px;
-}
 
 #logo {
     width: 130px;
