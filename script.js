@@ -204,3 +204,16 @@ function closeQuiz() {
 function showInfo() {
     alert("Raccoon – це проект для вивчення англійської мови у формі вікторини. Користувач обирає рівень знань (A, B, C) та проходить завдання на переклад слів з англійської на українську. Проєкт створено командою з 4 осіб. 🦝");
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const logo = document.getElementById("logo");
+    logo.style.transition = "transform 0.3s ease, filter 0.3s ease";
+    logo.addEventListener("mouseenter", function() {
+        logo.style.transform = "scale(1.1)";
+        logo.style.filter = "brightness(1.2)";
+    });
+    logo.addEventListener("mouseleave", function() {
+        logo.style.transform = "scale(1)";
+        logo.style.filter = "brightness(1)";
+    });
+});
