@@ -347,3 +347,31 @@ body {
     }
 }
 
+@media only screen and (device-width: 360px) and (device-height: 740px) and (orientation: portrait) {
+    .menu, .quiz, .info {
+        width: 95%;
+        padding: 14px;
+    }
+
+    .menu-button,
+    .wood-button,
+    .exit-button,
+    .back-button,
+    .level-button {
+        width: 95%;
+        height: 52px;
+        font-size: 18px;
+    }
+
+    #logo {
+        width: 70px;
+    }
+
+    .quiz {
+        font-size: 16px;
+    }
+
+    #quiz-results {
+        font-size: 18px;
+    }
+}
