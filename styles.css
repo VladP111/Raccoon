@@ -350,7 +350,7 @@ body {
 @media only screen and (device-width: 360px) and (device-height: 740px) and (orientation: portrait) {
     .menu, .quiz, .info {
         width: 95%;
-        padding: 14px;
+        padding: 16px;
     }
 
     .menu-button,
@@ -359,19 +359,28 @@ body {
     .back-button,
     .level-button {
         width: 95%;
-        height: 52px;
-        font-size: 18px;
+        height: 58px;
+        font-size: 20px;
+    }
+
+    #main-menu h1 {
+        font-size: 22px;
     }
 
     #logo {
-        width: 70px;
+        width: 80px;
     }
 
     .quiz {
-        font-size: 16px;
+        font-size: 18px;
     }
 
     #quiz-results {
+        font-size: 20px;
+    }
+
+    .info p {
         font-size: 18px;
     }
 }
+
